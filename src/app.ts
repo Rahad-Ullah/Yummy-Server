@@ -3,6 +3,7 @@ import cors from 'cors'
 import router from './app/routes'
 import cookieParser from 'cookie-parser'
 import notFound from './app/middlewares/notFound'
+import globalErrorHandler from './app/middlewares/globalErrorHandler'
 
 const app: Application = express()
 
@@ -19,5 +20,8 @@ app.get('/', (req: Request, res: Response) => {
 
 //handle not found
 app.use(notFound)
+
+//global error handler
+app.use(globalErrorHandler)
 
 export default app
