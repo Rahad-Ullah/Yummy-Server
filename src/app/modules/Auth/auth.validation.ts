@@ -1,5 +1,6 @@
 import { z } from 'zod'
 
+// register validation schema
 const registerValidationSchema = z.object({
   body: z.object({
     name: z.string({
@@ -14,6 +15,7 @@ const registerValidationSchema = z.object({
   }),
 })
 
+// login validation schema
 const loginValidationSchema = z.object({
   body: z.object({
     email: z.string({
@@ -23,7 +25,28 @@ const loginValidationSchema = z.object({
   }),
 })
 
+// validation schema for password change
+const changePasswordValidationSchema = z.object({
+  body: z.object({
+    oldPassword: z.string({
+      required_error: 'Old password is required',
+    }),
+    newPassword: z.string({ required_error: 'Password is required' }),
+  }),
+})
+
+// validation schema for refresh token
+const refreshTokenValidationSchema = z.object({
+  cookies: z.object({
+    refreshToken: z.string({
+      required_error: 'Refresh token is required!',
+    }),
+  }),
+})
+
 export const AuthValidation = {
   registerValidationSchema,
   loginValidationSchema,
+  changePasswordValidationSchema,
+  refreshTokenValidationSchema,
 }
