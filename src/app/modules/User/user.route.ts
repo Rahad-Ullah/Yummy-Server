@@ -26,3 +26,6 @@ router.patch(
   validateRequest(UserValidation.changeUserStatusValidationSchema),
   UserControllers.changeUserStatus,
 )
+
+// delete user
+router.delete('/:id', UserControllers.deleteUser)
