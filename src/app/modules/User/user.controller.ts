@@ -36,8 +36,24 @@ const getSingleUser = catchAsync(async (req, res) => {
   })
 })
 
+// change user status
+const changeUserStatus = catchAsync(async (req, res) => {
+  const result = await UserServices.changeUserStatusIntoDB(
+    req.params.id,
+    req.body,
+  )
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Status Changed Successfully',
+    data: result,
+  })
+})
+
 export const UserControllers = {
   getSingleUser,
   userRegister,
   getAllUsers,
+  changeUserStatus,
 }

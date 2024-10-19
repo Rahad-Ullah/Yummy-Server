@@ -33,7 +33,16 @@ const updateUserValidationSchema = z.object({
   }),
 })
 
+const changeUserStatusValidationSchema = z.object({
+  body: z.object({
+    status: z.nativeEnum(USER_STATUS, {
+      message: 'Status is not valid format',
+    }),
+  }),
+})
+
 export const UserValidation = {
   createUserValidationSchema,
   updateUserValidationSchema,
+  changeUserStatusValidationSchema,
 }

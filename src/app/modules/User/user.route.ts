@@ -7,10 +7,22 @@ const router = express.Router()
 
 export const UserRoutes = router
 
+// create user
 router.post(
   '/create-user',
   validateRequest(UserValidation.createUserValidationSchema),
   UserControllers.userRegister,
 )
+
+// get all users
 router.get('/', UserControllers.getAllUsers)
+
+// get single user
 router.get('/:id', UserControllers.getSingleUser)
+
+// change user status
+router.patch(
+  '/change-status/:id',
+  validateRequest(UserValidation.changeUserStatusValidationSchema),
+  UserControllers.changeUserStatus,
+)
