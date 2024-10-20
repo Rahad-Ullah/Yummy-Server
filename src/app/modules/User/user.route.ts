@@ -2,6 +2,8 @@ import express from 'express'
 import { UserControllers } from './user.controller'
 import validateRequest from '../../middlewares/validateRequest'
 import { UserValidation } from './user.validation'
+import auth from '../../middlewares/auth'
+import { USER_ROLE } from './user.constant'
 
 const router = express.Router()
 
@@ -20,9 +22,10 @@ router.get('/', UserControllers.getAllUsers)
 // get single user
 router.get('/:id', UserControllers.getSingleUser)
 
-// change user status
+// change user status between block and active
 router.patch(
   '/change-status/:id',
+  auth(USER_ROLE.ADMIN),
   validateRequest(UserValidation.changeUserStatusValidationSchema),
   UserControllers.changeUserStatus,
 )
