@@ -1,7 +1,7 @@
 import express from 'express'
 import validateRequest from '../../middlewares/validateRequest'
-import { FollowerValidation } from './follower.validation'
-import { FollowerControllers } from './follower.controller'
+import { FollowerValidation } from './profile.validation'
+import { FollowerControllers } from './profile.controller'
 
 const router = express.Router()
 
@@ -16,6 +16,6 @@ router.post(
 router.delete('/unfollow/:id', FollowerControllers.deleteFollowing)
 
 // get followings
-router.get('/', FollowerControllers.getFollowings)
+router.get('/followings', FollowerControllers.getFollowings)
 
-export const FollowerRoutes = router
+export const ProfileRoutes = router

@@ -1,8 +1,8 @@
 import httpStatus from 'http-status'
 import AppError from '../../errors/AppError'
 import { User } from '../User/user.model'
-import { IFollower } from './follower.interface'
-import { Follower } from './follower.model'
+import { IFollower } from './profile.interface'
+import { Follower } from './profile.model'
 
 // ---------- Follow ----------
 const createFollowerIntoDB = async (payload: IFollower) => {

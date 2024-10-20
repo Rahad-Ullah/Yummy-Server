@@ -1,7 +1,7 @@
 import httpStatus from 'http-status'
 import { catchAsync } from '../../utils/catchAsync'
 import sendResponse from '../../utils/sendResponse'
-import { FollowerServices } from './follower.service'
+import { FollowerServices } from './profile.service'
 
 // create following
 const createFollowing = catchAsync(async (req, res) => {
