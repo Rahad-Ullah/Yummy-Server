@@ -8,7 +8,7 @@ import { AdminControllers } from './admin.controller'
 
 const router = express.Router()
 
-export const UserRoutes = router
+export const AdminRoutes = router
 
 // create admin
 router.post(
@@ -21,12 +21,13 @@ router.post(
 // update admin
 router.patch(
   '/:id',
+  auth(USER_ROLE.ADMIN),
   validateRequest(AdminValidation.updateAdminValidationSchema),
   UserControllers.updateUser,
 )
 
 // remove admin
-router.delete('/:id', AdminControllers.removeAdmin)
+router.delete('/:id', auth(USER_ROLE.ADMIN), AdminControllers.removeAdmin)
 
 // retrieve all admins
-router.get('/', AdminControllers.getAllAdmins)
+router.get('/', auth(USER_ROLE.ADMIN), AdminControllers.getAllAdmins)

@@ -19,7 +19,7 @@ const removeAdminFromDB = async (id: string) => {
 }
 
 const getAllAdminsFromDB = async () => {
-  const result = await User.find()
+  const result = await User.find({ role: USER_ROLE.ADMIN })
   return result
 }
 
