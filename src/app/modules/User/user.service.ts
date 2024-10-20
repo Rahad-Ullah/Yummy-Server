@@ -22,6 +22,20 @@ const createUser = async (payload: TUser) => {
   return user
 }
 
+// update a existing user into database
+const UpdateUserIntoDB = async (id: string, payload: TUser) => {
+  const isUserExist = await User.findById(id)
+
+  // check if user exists
+  if (!isUserExist) {
+    throw new AppError(httpStatus.NOT_FOUND, `User not exists`)
+  }
+
+  const result = await User.findByIdAndUpdate(id, payload)
+
+  return result
+}
+
 // get all users from the database
 const getAllUsersFromDB = async (query: Record<string, unknown>) => {
   const users = new QueryBuilder(User.find(), query)
@@ -71,6 +85,7 @@ const changeUserStatusIntoDB = async (
 
 export const UserServices = {
   createUser,
+  UpdateUserIntoDB,
   getAllUsersFromDB,
   getSingleUserFromDB,
   deleteUserFromDB,

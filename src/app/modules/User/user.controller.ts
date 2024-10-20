@@ -14,6 +14,17 @@ const userRegister = catchAsync(async (req, res) => {
   })
 })
 
+const updateUser = catchAsync(async (req, res) => {
+  const result = await UserServices.UpdateUserIntoDB(req.params.id, req.body)
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'User Updated Successfully',
+    data: result,
+  })
+})
+
 const getAllUsers = catchAsync(async (req, res) => {
   const users = await UserServices.getAllUsersFromDB(req.query)
 
@@ -66,6 +77,7 @@ const changeUserStatus = catchAsync(async (req, res) => {
 export const UserControllers = {
   getSingleUser,
   userRegister,
+  updateUser,
   getAllUsers,
   deleteUser,
   changeUserStatus,
