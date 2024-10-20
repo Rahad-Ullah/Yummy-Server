@@ -27,5 +27,8 @@ router.patch(
   UserControllers.changeUserStatus,
 )
 
+// change user status
+router.patch('/premium/:id', UserControllers.changeUserMembership)
+
 // delete user
 router.delete('/:id', UserControllers.deleteUser)

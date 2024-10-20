@@ -1,7 +1,7 @@
 import httpStatus from 'http-status'
 import { QueryBuilder } from '../../builders/QueryBuilder'
 import AppError from '../../errors/AppError'
-import { UserSearchableFields } from './user.constant'
+import { USER_MEMBERSHIP, UserSearchableFields } from './user.constant'
 import { TUser } from './user.interface'
 import { User } from './user.model'
 
@@ -83,6 +83,20 @@ const changeUserStatusIntoDB = async (
   return result
 }
 
+// change user membership to premium into database
+const changeUserMembershipIntoDB = async (id: string) => {
+  const user = await User.findById(id)
+  if (!user) {
+    throw new AppError(httpStatus.NOT_FOUND, 'User does not exist')
+  }
+
+  const result = await User.findByIdAndUpdate(id, {
+    membership: USER_MEMBERSHIP.PREMIUM,
+  })
+
+  return result
+}
+
 export const UserServices = {
   createUser,
   UpdateUserIntoDB,
@@ -90,4 +104,5 @@ export const UserServices = {
   getSingleUserFromDB,
   deleteUserFromDB,
   changeUserStatusIntoDB,
+  changeUserMembershipIntoDB,
 }

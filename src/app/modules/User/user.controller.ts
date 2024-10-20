@@ -74,6 +74,18 @@ const changeUserStatus = catchAsync(async (req, res) => {
   })
 })
 
+// change user membership
+const changeUserMembership = catchAsync(async (req, res) => {
+  const result = await UserServices.changeUserMembershipIntoDB(req.params.id)
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Membership Changed to Premium Successfully',
+    data: result,
+  })
+})
+
 export const UserControllers = {
   getSingleUser,
   userRegister,
@@ -81,4 +93,5 @@ export const UserControllers = {
   getAllUsers,
   deleteUser,
   changeUserStatus,
+  changeUserMembership,
 }
