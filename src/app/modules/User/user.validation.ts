@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { USER_ROLE, USER_STATUS } from './user.constant'
+import { USER_MEMBERSHIP, USER_ROLE, USER_STATUS } from './user.constant'
 
 const createUserValidationSchema = z.object({
   body: z.object({
@@ -18,6 +18,7 @@ const createUserValidationSchema = z.object({
       required_error: 'Password is required',
     }),
     status: z.nativeEnum(USER_STATUS).default(USER_STATUS.ACTIVE),
+    membership: z.nativeEnum(USER_MEMBERSHIP).default(USER_MEMBERSHIP.BASIC),
     mobileNumber: z.string().optional(),
   }),
 })
