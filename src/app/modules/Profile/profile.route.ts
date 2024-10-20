@@ -9,7 +9,7 @@ import { USER_ROLE } from '../User/user.constant'
 
 const router = express.Router()
 
-// follow
+// edit profile
 router.patch(
   '/edit/:id',
   auth(USER_ROLE.ADMIN, USER_ROLE.USER),
