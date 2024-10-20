@@ -5,10 +5,17 @@ import { FollowerControllers } from './follower.controller'
 
 const router = express.Router()
 
+// follow
 router.post(
-  '/',
+  '/follow',
   validateRequest(FollowerValidation.createFollowerValidationSchema),
-  FollowerControllers.createFollower,
+  FollowerControllers.createFollowing,
 )
+
+// unfollow
+router.delete('/unfollow/:id', FollowerControllers.deleteFollowing)
+
+// get followings
+router.get('/', FollowerControllers.getFollowings)
 
 export const FollowerRoutes = router

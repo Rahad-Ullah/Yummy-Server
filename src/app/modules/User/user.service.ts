@@ -7,6 +7,16 @@ import { User } from './user.model'
 
 // create a new user into database
 const createUser = async (payload: TUser) => {
+  const isUserAlreadyExist = await User.findOne({ email: payload.email })
+
+  // check if user already exists
+  if (isUserAlreadyExist) {
+    throw new AppError(
+      httpStatus.CONFLICT,
+      `User ${payload.email} already exists`,
+    )
+  }
+
   const user = await User.create(payload)
 
   return user
