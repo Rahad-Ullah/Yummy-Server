@@ -1,6 +1,8 @@
 # Yummy Server
 
-The **Yummy** allows users to read recipe post with ease and provides admins the ability to manage these recipes and users.
+## Recipe Sharing Platform
+
+The **Yummy** allows users to read and share recipe post with ease and provides admins the ability to manage these recipes and users.
 
 ---
 
@@ -18,8 +20,6 @@ https://yummy-server-tau.vercel.app
 - Mongoose
 - JWT
 - Zod
-
-# Recipe Sharing Platform
 
 ## Features
 
