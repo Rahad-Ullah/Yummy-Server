@@ -5,6 +5,7 @@ import { ProfileRoutes } from '../modules/Profile/profile.route'
 import { AdminRoutes } from '../modules/Admin/admin.route'
 import { CommentRoutes } from '../modules/Comment/comment.route'
 import { RatingRoutes } from '../modules/Rating/rating.route'
+import { RecipeRoutes } from '../modules/Recipe/recipe.route'
 
 const router = express.Router()
 
@@ -24,6 +25,10 @@ const moduleRoutes = [
   {
     path: '/profile',
     route: ProfileRoutes,
+  },
+  {
+    path: '/recipes',
+    route: RecipeRoutes,
   },
   {
     path: '/ratings',

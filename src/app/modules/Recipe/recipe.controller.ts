@@ -77,6 +77,21 @@ const updateRecipeStatus = catchAsync(async (req, res) => {
   })
 })
 
+// update Recipe type
+const updateRecipeType = catchAsync(async (req, res) => {
+  const result = await RecipeServices.updateRecipeTypeIntoDB(
+    req.params.id,
+    req.body,
+  )
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Type Changed Successfully',
+    data: result,
+  })
+})
+
 export const RecipeControllers = {
   createRecipe,
   updateRecipe,
@@ -84,4 +99,5 @@ export const RecipeControllers = {
   getSingleRecipe,
   getAllRecipes,
   updateRecipeStatus,
+  updateRecipeType,
 }

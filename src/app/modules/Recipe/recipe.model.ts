@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-escape */
 import { Schema, model } from 'mongoose'
 import { IRecipe } from './recipe.interface'
-import { POST_STATUS } from './recipe.constant'
+import { POST_STATUS, RECIPE_TYPE } from './recipe.constant'
 
 const recipeSchema = new Schema<IRecipe>(
   {
@@ -29,6 +29,11 @@ const recipeSchema = new Schema<IRecipe>(
       type: Schema.Types.ObjectId,
       ref: 'User',
       required: true,
+    },
+    type: {
+      type: String,
+      enum: Object.keys(RECIPE_TYPE),
+      default: RECIPE_TYPE.BASIC,
     },
     status: {
       type: String,

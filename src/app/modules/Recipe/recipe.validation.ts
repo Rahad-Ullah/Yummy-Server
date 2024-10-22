@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { POST_STATUS } from './recipe.constant'
+import { POST_STATUS, RECIPE_TYPE } from './recipe.constant'
 
 const createRecipeValidationSchema = z.object({
   body: z.object({
@@ -15,7 +15,7 @@ const createRecipeValidationSchema = z.object({
     user: z.string({
       required_error: 'User is required',
     }),
-    status: z.nativeEnum(POST_STATUS).default(POST_STATUS.UNPUBLISHED),
+    type: z.nativeEnum(RECIPE_TYPE).default(RECIPE_TYPE.BASIC),
   }),
 })
 
@@ -35,8 +35,17 @@ const changeRecipeStatusValidationSchema = z.object({
   }),
 })
 
+const changeRecipeTypeValidationSchema = z.object({
+  body: z.object({
+    type: z.nativeEnum(RECIPE_TYPE, {
+      message: 'Type is not valid format',
+    }),
+  }),
+})
+
 export const RecipeValidation = {
   createRecipeValidationSchema,
   updateRecipeValidationSchema,
   changeRecipeStatusValidationSchema,
+  changeRecipeTypeValidationSchema,
 }

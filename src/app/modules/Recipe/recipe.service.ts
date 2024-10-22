@@ -81,6 +81,21 @@ const updateRecipeStatusIntoDB = async (
   return result
 }
 
+// update recipe type
+const updateRecipeTypeIntoDB = async (
+  id: string,
+  payload: { type: string },
+) => {
+  const recipe = await Recipe.findById(id)
+  if (!recipe) {
+    throw new AppError(httpStatus.NOT_FOUND, 'Recipe not found')
+  }
+
+  const result = await Recipe.findByIdAndUpdate(id, payload, { new: true })
+
+  return result
+}
+
 export const RecipeServices = {
   createRecipeIntoDB,
   updateRecipeIntoDB,
@@ -88,4 +103,5 @@ export const RecipeServices = {
   getSingleRecipeFromDB,
   getAllRecipesFromDB,
   updateRecipeStatusIntoDB,
+  updateRecipeTypeIntoDB,
 }
