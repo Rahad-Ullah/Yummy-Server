@@ -9,7 +9,7 @@ const router = express.Router()
 
 // create comment
 router.post(
-  '/',
+  '/create-comment',
   auth(USER_ROLE.USER),
   validateRequest(CommentValidation.createCommentValidationSchema),
   CommentControllers.createComment,

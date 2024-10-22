@@ -9,13 +9,13 @@ const router = express.Router()
 
 // create ratng
 router.post(
-  '/',
+  '/create-rating',
   auth(USER_ROLE.USER),
   validateRequest(RatingValidation.createRatingValidationSchema),
   RatingControllers.createRating,
 )
 
-// create ratng
+// retrieve ratngs
 router.get('/:id', RatingControllers.getAverageRating)
 
 // get single ratng
