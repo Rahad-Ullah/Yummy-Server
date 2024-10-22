@@ -17,6 +17,9 @@ router.post(
   RecipeControllers.createRecipe,
 )
 
+// update recipe
+router.patch('/:id', RecipeControllers.updateRecipe)
+
 // get all recipes
 router.get('/', RecipeControllers.getAllRecipes)
 
