@@ -9,6 +9,13 @@ export class QueryBuilder<T> {
     this.query = query
     this.modelQuery = modelQuery
   }
+
+  // get the total count before pagination
+  async getFilteredCount() {
+    const countQuery = this.modelQuery.model.find(this.modelQuery.getQuery())
+    return await countQuery.countDocuments()
+  }
+
   search(searchableFields: string[]) {
     let searchTerm = ''
 

@@ -40,14 +40,18 @@ const UpdateUserIntoDB = async (id: string, payload: TUser) => {
 const getAllUsersFromDB = async (query: Record<string, unknown>) => {
   const users = new QueryBuilder(User.find(), query)
     .fields()
-    .paginate()
     .sort()
     .filter()
     .search(UserSearchableFields)
 
-  const result = await users.modelQuery
+  // get doc count before filtering
+  const count = await users.getFilteredCount()
 
-  return result
+  users.paginate()
+
+  const data = await users.modelQuery.exec()
+
+  return { data, count }
 }
 
 // get single user from database
