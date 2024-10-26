@@ -6,7 +6,7 @@ const createUserValidationSchema = z.object({
     name: z.string({
       required_error: 'Name is required',
     }),
-    role: z.nativeEnum(USER_ROLE),
+    role: z.nativeEnum(USER_ROLE).default(USER_ROLE.USER),
     email: z
       .string({
         required_error: 'Email is required',
@@ -31,6 +31,9 @@ const updateUserValidationSchema = z.object({
     password: z.string().optional(),
     status: z.nativeEnum(USER_STATUS).optional(),
     mobileNumber: z.string().optional(),
+    membership: z.nativeEnum(USER_MEMBERSHIP).optional(),
+    bio: z.string().optional(),
+    profilePhoto: z.string().optional(),
   }),
 })
 

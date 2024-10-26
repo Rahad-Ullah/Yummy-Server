@@ -61,14 +61,18 @@ const getSingleUserFromDB = async (id: string) => {
   return user
 }
 
-// change user status into database
+// delete user from database
 const deleteUserFromDB = async (id: string) => {
   const user = await User.findById(id)
   if (!user) {
     throw new AppError(httpStatus.NOT_FOUND, 'User not found')
   }
 
-  const result = await User.findByIdAndDelete(id, { new: true })
+  const result = await User.findByIdAndUpdate(
+    id,
+    { isDeleted: true },
+    { new: true },
+  )
   return result
 }
 

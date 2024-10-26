@@ -12,14 +12,14 @@ const removeAdminFromDB = async (id: string) => {
 
   const result = await User.findByIdAndUpdate(
     id,
-    { role: USER_ROLE.USER },
+    { role: USER_ROLE.USER, isDeleted: true },
     { new: true },
   )
   return result
 }
 
 const getAllAdminsFromDB = async () => {
-  const result = await User.find({ role: USER_ROLE.ADMIN })
+  const result = await User.find({ role: USER_ROLE.ADMIN, isDeleted: false })
   return result
 }
 

@@ -31,6 +31,9 @@ const updateAdminValidationSchema = z.object({
     password: z.string().optional(),
     status: z.nativeEnum(USER_STATUS).optional(),
     mobileNumber: z.string().optional(),
+    membership: z.nativeEnum(USER_MEMBERSHIP).optional(),
+    bio: z.string().optional(),
+    profilePhoto: z.string().optional(),
   }),
 })
 
