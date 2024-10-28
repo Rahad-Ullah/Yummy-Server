@@ -54,16 +54,20 @@ const getSingleRecipeFromDB = async (id: string) => {
 
 // retrieve all recipes
 const getAllRecipesFromDB = async (query: Record<string, unknown>) => {
-  const recipes = new QueryBuilder(Recipe.find(), query)
+  const recipes = new QueryBuilder(Recipe.find().populate('user'), query)
     .fields()
-    .paginate()
     .sort()
     .filter()
     .search(RecipeSearchableFields)
 
-  const result = await recipes.modelQuery
+  // get doc count before filtering
+  const count = await recipes.getFilteredCount()
 
-  return result
+  recipes.paginate()
+
+  const data = await recipes.modelQuery.exec()
+
+  return { data, count }
 }
 
 // update recipe publish status

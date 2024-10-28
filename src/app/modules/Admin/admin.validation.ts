@@ -17,9 +17,10 @@ const createAdminValidationSchema = z.object({
     password: z.string({
       required_error: 'Password is required',
     }),
+    mobileNumber: z.string(),
     status: z.nativeEnum(USER_STATUS).default(USER_STATUS.ACTIVE),
     membership: z.nativeEnum(USER_MEMBERSHIP).default(USER_MEMBERSHIP.BASIC),
-    mobileNumber: z.string().optional(),
+    profilePhoto: z.string().optional(),
   }),
 })
 
