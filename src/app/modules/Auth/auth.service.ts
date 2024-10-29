@@ -82,6 +82,9 @@ const loginUser = async (payload: TLoginUser) => {
     mobileNumber: user.mobileNumber,
     role: user.role,
     status: user.status,
+    membership: user.membership,
+    profilePhoto: user.profilePhoto,
+    bio: user.bio,
   }
 
   const accessToken = createToken(
@@ -147,7 +150,7 @@ const changePassword = async (
   return null
 }
 
-// -------- refresh token ---------
+// -------- regenerate access token by refresh token ---------
 const refreshToken = async (token: string) => {
   // checking if the given token is valid
   const decoded = jwt.verify(
@@ -186,6 +189,9 @@ const refreshToken = async (token: string) => {
     mobileNumber: user.mobileNumber,
     role: user.role,
     status: user.status,
+    membership: user.membership,
+    profilePhoto: user.profilePhoto,
+    bio: user.bio,
   }
 
   const accessToken = createToken(
