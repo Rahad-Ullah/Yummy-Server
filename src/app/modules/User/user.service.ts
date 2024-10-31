@@ -31,7 +31,7 @@ const UpdateUserIntoDB = async (id: string, payload: TUser) => {
     throw new AppError(httpStatus.NOT_FOUND, `User not exists`)
   }
 
-  const result = await User.findByIdAndUpdate(id, payload)
+  const result = await User.findByIdAndUpdate(id, payload, { new: true })
 
   return result
 }
