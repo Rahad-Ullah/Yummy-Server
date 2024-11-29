@@ -4,6 +4,7 @@ import AppError from '../../errors/AppError'
 import { USER_MEMBERSHIP, UserSearchableFields } from './user.constant'
 import { TUser } from './user.interface'
 import { User } from './user.model'
+import { JwtPayload } from 'jsonwebtoken'
 
 // create a new user into database
 const createUser = async (payload: TUser) => {
@@ -23,15 +24,17 @@ const createUser = async (payload: TUser) => {
 }
 
 // update a existing user into database
-const UpdateUserIntoDB = async (id: string, payload: TUser) => {
-  const isUserExist = await User.findById(id)
+const UpdateUserIntoDB = async (user: JwtPayload, payload: TUser) => {
+  const userData = await User.findOne({ email: user.email })
 
   // check if user exists
-  if (!isUserExist) {
+  if (!userData) {
     throw new AppError(httpStatus.NOT_FOUND, `User not exists`)
   }
 
-  const result = await User.findByIdAndUpdate(id, payload, { new: true })
+  const result = await User.findByIdAndUpdate(userData?.id, payload, {
+    new: true,
+  })
 
   return result
 }

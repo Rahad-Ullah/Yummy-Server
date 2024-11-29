@@ -23,7 +23,7 @@ router.patch(
   '/:id',
   auth(USER_ROLE.ADMIN),
   validateRequest(AdminValidation.updateAdminValidationSchema),
-  UserControllers.updateUser,
+  AdminControllers.updateAdmin,
 )
 
 // remove admin

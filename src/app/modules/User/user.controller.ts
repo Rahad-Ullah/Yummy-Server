@@ -16,7 +16,8 @@ const userRegister = catchAsync(async (req, res) => {
 })
 
 const updateUser = catchAsync(async (req, res) => {
-  const data = await UserServices.UpdateUserIntoDB(req.params.id, req.body)
+  const data = await UserServices.UpdateUserIntoDB(req.user, req.body)
+  
   const { accessToken } = await AuthServices.refreshToken(
     req.cookies.refreshToken,
   )

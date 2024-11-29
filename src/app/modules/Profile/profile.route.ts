@@ -11,7 +11,7 @@ const router = express.Router()
 
 // edit profile
 router.patch(
-  '/edit/:id',
+  '/edit',
   auth(USER_ROLE.ADMIN, USER_ROLE.USER),
   validateRequest(UserValidation.updateUserValidationSchema),
   UserControllers.updateUser,
