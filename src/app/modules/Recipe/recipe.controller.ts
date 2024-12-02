@@ -4,7 +4,7 @@ import sendResponse from '../../utils/sendResponse'
 import { RecipeServices } from './recipe.service'
 
 const createRecipe = catchAsync(async (req, res) => {
-  const result = await RecipeServices.createRecipeIntoDB(req.body)
+  const result = await RecipeServices.createRecipeIntoDB(req.user, req.body)
 
   sendResponse(res, {
     success: true,
@@ -15,6 +15,7 @@ const createRecipe = catchAsync(async (req, res) => {
 })
 
 const updateRecipe = catchAsync(async (req, res) => {
+
   const result = await RecipeServices.updateRecipeIntoDB(
     req.params.id,
     req.body,

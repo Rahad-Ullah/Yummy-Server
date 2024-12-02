@@ -12,9 +12,6 @@ const createRecipeValidationSchema = z.object({
     content: z.string({
       required_error: 'Content is required',
     }),
-    user: z.string({
-      required_error: 'User is required',
-    }),
     type: z.nativeEnum(RECIPE_TYPE).default(RECIPE_TYPE.BASIC),
   }),
 })

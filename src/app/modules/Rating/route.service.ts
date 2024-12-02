@@ -26,7 +26,7 @@ const getAverageRatingFromDB = async (id: string) => {
     (totalRating, rating) => (totalRating += rating.ratingCount),
     0,
   )
-  const averageRating = totalRating / ratings.length
+  const averageRating = parseFloat((totalRating / ratings.length).toFixed(2))
   return averageRating
 }
 

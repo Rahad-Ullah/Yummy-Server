@@ -17,7 +17,7 @@ const createRatingValidationSchema = z.object({
       .refine((val) => {
         return mongoose.Types.ObjectId.isValid(val)
       }),
-    recipeCount: z.number({ required_error: 'RecipeCount is required' }),
+    ratingCount: z.number({ required_error: 'RatingCount is required' }),
   }),
 })
 

@@ -5,16 +5,17 @@ import { IRecipe } from './recipe.interface'
 import { Recipe } from './recipe.model'
 import { QueryBuilder } from '../../builders/QueryBuilder'
 import { RecipeSearchableFields } from './recipe.constant'
+import { JwtPayload } from 'jsonwebtoken'
 
 // create a new recipe
-const createRecipeIntoDB = async (payload: IRecipe) => {
-  const user = await User.findById(payload.user)
+const createRecipeIntoDB = async (user: JwtPayload, payload: IRecipe) => {
+  const userData = await User.findOne({ email: user.email })
   // check if user is exist
-  if (!user) {
+  if (!userData) {
     throw new AppError(httpStatus.NOT_FOUND, 'User does not exist')
   }
 
-  const result = await Recipe.create(payload)
+  const result = await Recipe.create({ ...payload, user: userData.id })
   return result
 }
 
@@ -48,7 +49,7 @@ const deleteRecipeFromDB = async (id: string) => {
 
 // retrieve single recipe
 const getSingleRecipeFromDB = async (id: string) => {
-  const result = await Recipe.findById(id)
+  const result = await Recipe.findById(id).populate('user')
   return result
 }
 
