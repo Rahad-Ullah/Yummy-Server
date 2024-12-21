@@ -74,6 +74,18 @@ export class QueryBuilder<T> {
 
     excludeFields.forEach((e) => delete queryObj[e])
 
+    // Remove any fields with null, undefined, or empty values
+    Object.keys(queryObj).forEach((key) => {
+      if (
+        queryObj[key] == null ||
+        queryObj[key] === undefined ||
+        queryObj[key] === ''
+      ) {
+        delete queryObj[key]
+      }
+    })
+
+    // Apply the sanitized query object
     this.modelQuery = this.modelQuery.find(queryObj as FilterQuery<T>)
 
     return this

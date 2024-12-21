@@ -55,6 +55,7 @@ const getSingleRecipeFromDB = async (id: string) => {
 
 // retrieve all recipes
 const getAllRecipesFromDB = async (query: Record<string, unknown>) => {
+
   const recipes = new QueryBuilder(Recipe.find().populate('user'), query)
     .fields()
     .sort()
